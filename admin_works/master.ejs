@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous" />
+        <style>
+            #form {
+                display: none;
+            }
+            #form1 {
+                display: none;
+            }
+            input{
+                padding:10px;
+                margin:5px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <h1 style="text-align:center">ALL DATA</h1>
+
+
+        <% if(info.user){%>
+            <h3>buses available</h3>
+            <table class="table table-striped table-light">
+                <thead class="thead-dark ">
+                    <tr>
+
+                        <th scope="col">#</th>
+                        <th scope="col">Bus No</th>
+                        <th scope="col">Current Location</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Reaching Time</th>
+                        <th scope="col">amount</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    <% for(i=0;i<busDatas.length;i++){%>
+                        <tr>
+
+                            <th scope="row">
+                                <%= y=i+1 %>
+                            </th>
+                            <td>
+                                <%= busDatas[i].busno %>
+                            </td>
+                            <td>
+                                <%=busDatas[i].currentlocation %>
+                            </td>
+                            <td>
+                                <%= busDatas[i].destination %>
+                            </td>
+                            <td>
+                                <%= busDatas[i].arrivaltime %>
+                            </td>
+                            <td>
+                                <%= busDatas[i].reachingtime %>
+                            </td>
+                            <td>
+                                <%= busDatas[i].amt %>
+                            </td>
+                        </tr>
+                        <% }%>
+
+
+                </tbody>
+            </table>
+
+            <% }else {%>
+                <h3>try searching for valid location</h3>
+                <% }%>
+
+
+
+                    <button type="button" class="btn btn-danger" onclick="change()">delete</button>
+                    <button type="button" class="btn btn-primary" onclick="change1()">insert</button>
+
+                    <br>
+                    <form action="/delete" method="post" id="form">
+
+                        <input type="number" placeholder="busno" name="busno" id="busno" required>
+                        <br>
+                        <button type="submit" class="btn">delete</button>
+                    </form>
+
+
+                  
+
+                    <form action="/insert" method="post" id="form1">
+
+                        <input type="number" placeholder="busno" name="busno" id="busno" required>
+                        <input type="text" placeholder="currentlocation" name="currentlocation" >
+                         <input type="date" placeholder="time" name="time">
+                        <input type="text" placeholder="destination" name="destination">
+                        <label for="arrivaltime">arrival time</label>
+                        <input type="time" placeholder="arrivaltime" name="arrivaltime" id="arrivaltime">
+                        <label for="reachingtime"> reaching time</label>
+                        <input type="time" placeholder="reachingtime" name="reachingtime" id="reachingtime">
+                        <input type="text" placeholder="amt" name="amt">
+                         
+                        <br>
+                        <button type="submit">add</button>
+                    </form>
+
+                    <script>
+                        function change() {
+
+                            x = document.getElementById('form');
+                            if (x.style.display == "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
+
+                        }
+
+
+                        function change1() {
+
+                            x = document.getElementById('form1');
+                            if (x.style.display == "none") {
+                                x.style.display = "block";
+                            } else {
+                                x.style.display = "none";
+                            }
+
+                        }
+                    </script>
+    </body>
+
+</html>
